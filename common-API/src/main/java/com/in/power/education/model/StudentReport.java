@@ -1,4 +1,4 @@
-package com.sam.in.model;
+package com.in.power.education.model;
 
 import java.io.Serializable;
 import java.io.Serializable;

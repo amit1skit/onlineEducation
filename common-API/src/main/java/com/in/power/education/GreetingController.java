@@ -1,4 +1,4 @@
-package com.sam.in;
+package com.in.power.education;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sam.in.model.Greeting;
+import com.in.power.education.model.Greeting;
 
 @RestController
 public class GreetingController {
