@@ -8,7 +8,7 @@
 	<version>0.1.0</version>
 
 	<parent>
-		<groupId>com.in.education</groupId>
+		<groupId>com.in.power.education</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
