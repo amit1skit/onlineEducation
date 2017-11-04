@@ -12,7 +12,6 @@ import org.springframework.data.rest.core.annotation.Description;
 @Entity
 public class Course extends AbstractEntity implements Serializable  {
 
-//	1. courseID
 	@Description(value="Course Name")
 	private String cNm;
 	

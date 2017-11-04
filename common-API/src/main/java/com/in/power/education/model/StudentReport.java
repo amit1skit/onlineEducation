@@ -1,10 +1,10 @@
 package com.in.power.education.model;
 
 import java.io.Serializable;
-import java.io.Serializable;
-import java.security.Timestamp;
 import java.sql.Blob;
+
 import javax.persistence.Entity;
+
 import org.springframework.data.rest.core.annotation.Description;
 
 @Entity

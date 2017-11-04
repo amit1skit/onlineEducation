@@ -22,18 +22,21 @@ public class Question extends AbstractEntity implements Serializable  {
 	@Description(value="Answers JSON which contains Answer and it's Weightage")
 	private Blob answers;
 	
-//	@Description(value="Answers JSON which contains Answer and it's Weigtage")
-//	5. courseID
+	@Description(value="Course this question belongs to")
+	private Course courseID;
 	
 	@Description(value="Difficulty level of question")
 	private Integer difficultyLevel;
 	
 	@Description(value="Language 1 for Hindi 2 for English")
 	private Integer langCd;
-//	@Description(value="Answers JSON which contains Answer and it's Weigtage")
-//	8. subjectID
-//	@Description(value="Answers JSON which contains Answer and it's Weigtage")
-//	9. topicID
+	
+	@Description(value="Subject which this question belongs to")
+	private Subject subjectID;
+	
+	@Description(value="Topic of the questions")
+	private Topic topicID;
+	
 	@Description(value="Explanation of Right Answer")
 	private String expln;
 	
