@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,17 +15,18 @@ import org.springframework.data.rest.core.annotation.Description;
 @Entity
 public class UserInfo  extends AbstractEntity implements Serializable {
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@Description(value="User Login information")
 	private UserLogin userLogin;  
 	
 	@Description(value="Role of User")
 	private String role;
 	
 	@Description(value="First Name")
-	private String FName;
+	private String fName;
 	
 	@Description(value="Last Name")
-	private String LName;
+	private String lName;
 	
 	@Description(value="Date of Birth")
 	private Date dob;
@@ -46,23 +48,37 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 	private String addressLine2;
 	
 	@Description(value="Address City")
-	private String addressCity;
+	private String city;
 	
 	@Description(value="Address State")
-	private String addressState;
+	private String state;
 	
 	@Description(value="Address Country")
-	private String addressCountry;
+	private String country;
 	
+	@Description(value="UserID")
+	private String userID;
 	
 	public UserInfo(){}
 	
-//	public UserInfo(String userID, String password,Timestamp lastLogintime, Timestamp creationTime){
-//		this.userID = userID;
-//		this.password = password;
-//		this.lastLogintime = lastLogintime;
-//		this.creationTime = creationTime;
-//	}
+	public UserInfo(UserLogin userLogin, String role,String fName,String lName,
+			Date dob,String gender,String CellNo,String mailID,String addressLine1,
+			String addressLine2,String city,String state,String country, String userID){
+		this.userLogin = userLogin;
+		this.role = role;
+		this.fName = fName;
+		this.lName = lName;
+		this.dob =dob;
+		this.gender = gender;
+		this.CellNo = CellNo;
+		this.mailID = mailID;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.userID = userID;
+	}
 
 	@Override
 	public String toString(){
@@ -75,22 +91,6 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public String getFName() {
-		return FName;
-	}
-
-	public void setFName(String fName) {
-		FName = fName;
-	}
-
-	public String getLName() {
-		return LName;
-	}
-
-	public void setLName(String lName) {
-		LName = lName;
 	}
 
 	public Date getDob() {
@@ -141,27 +141,59 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 		this.addressLine2 = addressLine2;
 	}
 
-	public String getAddressCity() {
-		return addressCity;
+	public UserLogin getUserLogin() {
+		return userLogin;
 	}
 
-	public void setAddressCity(String addressCity) {
-		this.addressCity = addressCity;
+	public void setUserLogin(UserLogin userLogin) {
+		this.userLogin = userLogin;
 	}
 
-	public String getAddressState() {
-		return addressState;
+	public String getlName() {
+		return lName;
 	}
 
-	public void setAddressState(String addressState) {
-		this.addressState = addressState;
+	public void setlName(String lName) {
+		this.lName = lName;
 	}
 
-	public String getAddressCountry() {
-		return addressCountry;
+	public String getCity() {
+		return city;
 	}
 
-	public void setAddressCountry(String addressCountry) {
-		this.addressCountry = addressCountry;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }

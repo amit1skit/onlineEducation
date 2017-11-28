@@ -2,9 +2,9 @@ package com.in.power.education.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -15,7 +15,8 @@ import org.springframework.data.rest.core.annotation.Description;
 @Entity
 public class UserLogin extends AbstractEntity implements Serializable {
 
-	@OneToOne
+	@Description("User Infor mapping")
+	@OneToOne(mappedBy="userLogin", cascade=CascadeType.ALL, orphanRemoval = true)
 	private UserInfo userInfo; 
 	
 	@Description(value = "User ID")
@@ -39,12 +40,11 @@ public class UserLogin extends AbstractEntity implements Serializable {
 	public UserLogin(){}
 	
 	public UserLogin(String userID, String password,Timestamp lastLogintime, Timestamp creationTime,
-			UserInfo userInfo,Integer noOfAttempt,Blob ipAddresses){
+			Integer noOfAttempt,Blob ipAddresses){
 		this.userID = userID;
 		this.password = password;
 		this.lastLogintime = lastLogintime;
 		this.creationTime = creationTime;
-		this.userInfo = userInfo;
 		this.noOfAttempt = noOfAttempt;
 		this.ipAddresses = ipAddresses;
 	}
@@ -112,4 +112,5 @@ public class UserLogin extends AbstractEntity implements Serializable {
 	public void setIpAddresses(Blob ipAddresses) {
 		this.ipAddresses = ipAddresses;
 	}
+
 }
