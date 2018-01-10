@@ -8,7 +8,9 @@ import org.springframework.data.rest.core.annotation.Description;
 
 import java.sql.Blob;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Question extends AbstractEntity implements Serializable  {
@@ -22,8 +24,9 @@ public class Question extends AbstractEntity implements Serializable  {
 	@Description(value="Answers JSON which contains Answer and it's Weightage")
 	private Blob answers;
 	
-	@Description(value="Course this question belongs to")
-	private Course courseID;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@Description(value="Topic Information")
+	private Topic topic;
 	
 	@Description(value="Difficulty level of question")
 	private Integer difficultyLevel;
@@ -31,11 +34,6 @@ public class Question extends AbstractEntity implements Serializable  {
 	@Description(value="Language 1 for Hindi 2 for English")
 	private Integer langCd;
 	
-	@Description(value="Subject which this question belongs to")
-	private Subject subjectID;
-	
-	@Description(value="Topic of the questions")
-	private Topic topicID;
 	
 	@Description(value="Explanation of Right Answer")
 	private String expln;
@@ -51,11 +49,15 @@ public class Question extends AbstractEntity implements Serializable  {
 	
 	@Description(value="Usage of Question in different tests.")
 	private Blob testUasge;
+	
+	@Description(value="Tag a question to different set of tests")
+	private String tagId;
+	
 																
 	public Question() {	}
 	
-	public Question(Blob question, Integer optionType,Blob answers, Integer difficultyLevel,
-			Integer langCd,String expln,Timestamp expiryTime,Integer status,Integer score,Blob testUasge ){
+	public Question(Blob question, Integer optionType,Blob answers, Integer difficultyLevel, String tagId,
+			Integer langCd,String expln,Timestamp expiryTime,Integer status,Integer score,Blob testUasge,Topic topic){
 		this.question = question;
 		this.optionType = optionType;
 		this.answers = answers;
@@ -66,6 +68,8 @@ public class Question extends AbstractEntity implements Serializable  {
 		this.status = status;
 		this.score =score;
 		this.testUasge = testUasge;
+		this.topic = topic;
+		this.tagId = tagId;
 	}
 
 	@Override
@@ -150,5 +154,21 @@ public class Question extends AbstractEntity implements Serializable  {
 
 	public void setTestUasge(Blob testUasge) {
 		this.testUasge = testUasge;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	public String getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
 	}	
 }

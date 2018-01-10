@@ -1,12 +1,14 @@
 package com.in.power.education.model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
-import java.sql.Blob;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.rest.core.annotation.Description;
 
 @Entity
@@ -25,14 +27,24 @@ public class Subject extends AbstractEntity implements Serializable  {
 	@Description(value="Base Price for Subject")
 	private Float basePrice;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@Description(value="Course Information")
+	private Course course;  
+	
+	@Description("Subject to Topic mapping")
+	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval = true)
+	private Set<Topic> topic;
+	
+	
 	public Subject() {
 	}
 	
-	public Subject(String subjectName,String subjectDesc,String clas,Float basePrice){
+	public Subject(String subjectName,String subjectDesc,String clas,Float basePrice, Course course){
 		this.subjectName = subjectName;
 		this.subjectDesc = subjectDesc;
-		this.clas =clas;
+		this.clas = clas;
 		this.basePrice = basePrice;
+		this.course = course;
 	}
 
 	public String getSubjectName() {
@@ -66,4 +78,12 @@ public class Subject extends AbstractEntity implements Serializable  {
 	public void setBasePrice(Float basePrice) {
 		this.basePrice = basePrice;
 	}
+
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
 }

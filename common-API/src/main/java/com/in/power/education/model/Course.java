@@ -1,12 +1,13 @@
 package com.in.power.education.model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
-import java.sql.Blob;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.rest.core.annotation.Description;
 
 @Entity
@@ -20,6 +21,10 @@ public class Course extends AbstractEntity implements Serializable  {
 	
 	@Description(value="Base Price for Subject")
 	private Float basePrice;
+	
+	@Description("Course to Subject mapping")
+	@OneToMany(mappedBy="course", cascade=CascadeType.ALL, orphanRemoval = true)
+	private Set<Subject> subject; 
 	
 	public Course() {
 	}
