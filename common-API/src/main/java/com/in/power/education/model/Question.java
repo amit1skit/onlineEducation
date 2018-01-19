@@ -1,13 +1,14 @@
 package com.in.power.education.model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.rest.core.annotation.Description;
 
-import java.sql.Blob;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+import javax.persistence.Lob;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,23 +17,31 @@ import javax.persistence.ManyToOne;
 public class Question extends AbstractEntity implements Serializable  {
 
 	@Description(value="Full Question with different language")
-	private Blob question;
+	@Lob
+	@Column(name="Question")
+	private byte[] question;
 	
 	@Description(value="Oprion Type value one Answer is 1, MCQ is 2")
-	private Integer optionType;
+	private String optionType;
 	
 	@Description(value="Answers JSON which contains Answer and it's Weightage")
-	private Blob answers;
+	@Lob
+	@Column(name="Answers")
+	private byte[] answers;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@Description(value="Topic Information")
+	@Description(value="Topic Information")	
+	@ManyToOne()
 	private Topic topic;
 	
+	@Description(value="Subject Information")
+	@ManyToOne()
+	private Subject subject;
+	
 	@Description(value="Difficulty level of question")
-	private Integer difficultyLevel;
+	private String difficultyLevel;
 	
 	@Description(value="Language 1 for Hindi 2 for English")
-	private Integer langCd;
+	private String langCd;
 	
 	
 	@Description(value="Explanation of Right Answer")
@@ -48,16 +57,20 @@ public class Question extends AbstractEntity implements Serializable  {
 	private Integer score;
 	
 	@Description(value="Usage of Question in different tests.")
-	private Blob testUasge;
+	@Lob
+	@Column(name="TestUsage")
+	private byte[] testUasge;
 	
 	@Description(value="Tag a question to different set of tests")
 	private String tagId;
 	
+	@Description(value="Index numbe of correct Answer")
+	private String correctAns;
 																
 	public Question() {	}
 	
-	public Question(Blob question, Integer optionType,Blob answers, Integer difficultyLevel, String tagId,
-			Integer langCd,String expln,Timestamp expiryTime,Integer status,Integer score,Blob testUasge,Topic topic){
+	public Question(byte[] question, String optionType,byte[] answers, String difficultyLevel, String tagId,Topic topic, Subject subject,
+			String langCd,String expln,Timestamp expiryTime,Integer status,Integer score,byte[] testUasge, String correctAns){
 		this.question = question;
 		this.optionType = optionType;
 		this.answers = answers;
@@ -69,51 +82,50 @@ public class Question extends AbstractEntity implements Serializable  {
 		this.score =score;
 		this.testUasge = testUasge;
 		this.topic = topic;
+		this.subject =subject;
 		this.tagId = tagId;
+		this.correctAns = correctAns;
 	}
 
-	@Override
-	public String toString(){
-		return ReflectionToStringBuilder.toString(this);
-	}
 	
-	public Blob getQuestion() {
+	
+	public byte[] getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(Blob question) {
+	public void setQuestion(byte[] question) {
 		this.question = question;
 	}
 
-	public Integer getOptionType() {
+	public String getOptionType() {
 		return optionType;
 	}
 
-	public void setOptionType(Integer optionType) {
+	public void setOptionType(String optionType) {
 		this.optionType = optionType;
 	}
 
-	public Blob getAnswers() {
+	public byte[] getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(Blob answers) {
+	public void setAnswers(byte[] answers) {
 		this.answers = answers;
 	}
 
-	public Integer getDifficultyLevel() {
+	public String getDifficultyLevel() {
 		return difficultyLevel;
 	}
 
-	public void setDifficultyLevel(Integer difficultyLevel) {
+	public void setDifficultyLevel(String difficultyLevel) {
 		this.difficultyLevel = difficultyLevel;
 	}
 
-	public Integer getLangCd() {
+	public String getLangCd() {
 		return langCd;
 	}
 
-	public void setLangCd(Integer langCd) {
+	public void setLangCd(String langCd) {
 		this.langCd = langCd;
 	}
 
@@ -148,11 +160,11 @@ public class Question extends AbstractEntity implements Serializable  {
 		this.score = score;
 	}
 
-	public Blob getTestUasge() {
+	public byte[] getTestUasge() {
 		return testUasge;
 	}
 
-	public void setTestUasge(Blob testUasge) {
+	public void setTestUasge(byte[] testUasge) {
 		this.testUasge = testUasge;
 	}
 
@@ -170,5 +182,34 @@ public class Question extends AbstractEntity implements Serializable  {
 
 	public void setTagId(String tagId) {
 		this.tagId = tagId;
+	}
+
+	/**
+	 * @return the subject
+	 */
+	public Subject getSubject() {
+		return subject;
+	}
+
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	/**
+	 * @return the correctAns
+	 */
+	public String getCorrectAns() {
+		return correctAns;
+	}
+
+	/**
+	 * @param correctAns the correctAns to set
+	 */
+	public void setCorrectAns(String correctAns) {
+		this.correctAns = correctAns;
 	}	
+	
 }

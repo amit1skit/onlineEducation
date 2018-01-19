@@ -22,9 +22,9 @@ public class Course extends AbstractEntity implements Serializable  {
 	@Description(value="Base Price for Subject")
 	private Float basePrice;
 	
-	@Description("Course to Subject mapping")
-	@OneToMany(mappedBy="course", cascade=CascadeType.ALL, orphanRemoval = true)
-	private Set<Subject> subject; 
+//	@Description("Course to Subject mapping")
+//	@OneToMany(mappedBy="course", cascade=CascadeType.ALL, orphanRemoval = true)
+//	private Set<Subject> subject; 
 	
 	public Course() {
 	}

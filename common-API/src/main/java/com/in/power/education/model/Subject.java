@@ -5,11 +5,11 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.rest.core.annotation.Description;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Subject extends AbstractEntity implements Serializable  {
@@ -27,24 +27,27 @@ public class Subject extends AbstractEntity implements Serializable  {
 	@Description(value="Base Price for Subject")
 	private Float basePrice;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@Description(value="Course Information")
-	private Course course;  
+	@Description("Topic to Question mapping")
+	@OneToMany(mappedBy="subject", cascade=CascadeType.ALL, orphanRemoval = true)
+	private Set<Question> question;
+	
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@Description(value="Course Information")
+//	private Course course;  
 	
 	@Description("Subject to Topic mapping")
-	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="subject", cascade=CascadeType.ALL, orphanRemoval = true)
 	private Set<Topic> topic;
 	
 	
 	public Subject() {
 	}
 	
-	public Subject(String subjectName,String subjectDesc,String clas,Float basePrice, Course course){
+	public Subject(String subjectName,String subjectDesc,String clas,Float basePrice){
 		this.subjectName = subjectName;
 		this.subjectDesc = subjectDesc;
 		this.clas = clas;
 		this.basePrice = basePrice;
-		this.course = course;
 	}
 
 	public String getSubjectName() {
@@ -79,11 +82,11 @@ public class Subject extends AbstractEntity implements Serializable  {
 		this.basePrice = basePrice;
 	}
 
-	public Course getCourse() {
-		return course;
-	}
-	public void setCourse(Course course) {
-		this.course = course;
-	}
+//	public Course getCourse() {
+//		return course;
+//	}
+//	public void setCourse(Course course) {
+//		this.course = course;
+//	}
 	
 }

@@ -31,7 +31,7 @@ public class Topic extends AbstractEntity implements Serializable  {
 	private Subject subject;
 	
 	@Description("Topic to Question mapping")
-	@OneToMany(mappedBy="question", cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval = true)
 	private Set<Question> question;
 	
 	public Topic() {
