@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.security.Timestamp;
 import java.sql.Blob;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.rest.core.annotation.Description;
@@ -31,7 +33,7 @@ public class Test extends AbstractEntity implements Serializable  {
 	private Timestamp lastAccessts;
 	
 	@Description(value="Difficult level 1. Easy, 2. Medium, 3. difficult")
-	private Integer diificultyLevel;
+	private String diificultyLevel;
 	
 	@Description(value="Test Name")
 	private String testName;
@@ -47,12 +49,23 @@ public class Test extends AbstractEntity implements Serializable  {
 	
 	@Description(value="Percentage of Negative marks")
 	private Integer percentNegative;
+	
+	@Description(value="Total Marks of Test")
+	private Integer totalMarks;
+	
+	@Description(value="Category is similar to Tag that we can have.")
+	private String category;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@Description(value="Mapping to Test Product")
+	private TestProduct testProduct;
 
 	public Test() {
 	}
 	
-	public Test(String qCount,Blob questionIds,Integer duration,String createdBy,Timestamp lastAccessts,Integer diificultyLevel,
-			String testName,String testDesc,String basePriceTest,Integer status,Integer percentNegative){
+	public Test(String qCount,Blob questionIds,Integer duration,String createdBy,Timestamp lastAccessts,
+			String diificultyLevel,String testName,String testDesc,String basePriceTest,Integer status,
+			Integer percentNegative,Integer totalMarks,TestProduct testProduct,String category){
 		this.qCount = qCount;
 		this.questionIds = questionIds;
 		this.duration = duration;
@@ -64,6 +77,9 @@ public class Test extends AbstractEntity implements Serializable  {
 		this.basePriceTest = basePriceTest;
 		this.status = status;
 		this.percentNegative = percentNegative;
+		this.totalMarks = totalMarks;
+		this.testProduct = testProduct;
+		this.category = category;
 	}
 
 	@Override
@@ -111,11 +127,11 @@ public class Test extends AbstractEntity implements Serializable  {
 		this.lastAccessts = lastAccessts;
 	}
 
-	public Integer getDiificultyLevel() {
+	public String getDiificultyLevel() {
 		return diificultyLevel;
 	}
 
-	public void setDiificultyLevel(Integer diificultyLevel) {
+	public void setDiificultyLevel(String diificultyLevel) {
 		this.diificultyLevel = diificultyLevel;
 	}
 
@@ -157,5 +173,47 @@ public class Test extends AbstractEntity implements Serializable  {
 
 	public void setPercentNegative(Integer percentNegative) {
 		this.percentNegative = percentNegative;
+	}
+
+	/**
+	 * @return the totalMarks
+	 */
+	public Integer getTotalMarks() {
+		return totalMarks;
+	}
+
+	/**
+	 * @param totalMarks the totalMarks to set
+	 */
+	public void setTotalMarks(Integer totalMarks) {
+		this.totalMarks = totalMarks;
+	}
+
+	/**
+	 * @return the testProduct
+	 */
+	public TestProduct getTestProduct() {
+		return testProduct;
+	}
+
+	/**
+	 * @param testProduct the testProduct to set
+	 */
+	public void setTestProduct(TestProduct testProduct) {
+		this.testProduct = testProduct;
+	}
+
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

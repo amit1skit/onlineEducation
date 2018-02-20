@@ -31,9 +31,11 @@ public interface QuestionRepo extends CrudRepository<Question, Long>{
 			@Param("tagId") String tagId,
 			@Param("optionType") String optionType);
 
-	
+	List<Question> findBySubjectAndTopicAndOptionType(@Param("subject") Subject subject,
+			 @Param("topic") Topic topic,
+			@Param("optionType") String optionType);
+
 	List<Question> findByTagId(@Param("tagId") String tagId );
-	
 }
 
 

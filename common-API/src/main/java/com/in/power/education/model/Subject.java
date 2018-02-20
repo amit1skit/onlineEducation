@@ -9,8 +9,6 @@ import javax.persistence.OneToMany;
 
 import org.springframework.data.rest.core.annotation.Description;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 public class Subject extends AbstractEntity implements Serializable  {
 
