@@ -33,7 +33,7 @@ public class PowerController {
 	
 //		return new ResponseEntity(responseObj, HttpStatus.OK);
 		if(responseObj!=null)
-			return	ResponseEntity.ok(responseObj);
+			return	ResponseEntity.ok(responseObj.toString());
 		else
 			return	ResponseEntity.ok(null);
 	}

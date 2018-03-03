@@ -6,6 +6,7 @@ import java.sql.Blob;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -14,14 +15,12 @@ import org.springframework.data.rest.core.annotation.Description;
 @Entity
 public class Test extends AbstractEntity implements Serializable  {
 
-//	2. courseID
-//	3. subjectID Need To discuss More
-////	4. topicID --Need To discuss More
 	@Description(value="Number of Question in Test")
-	private String qCount;
+	private Integer qCount;
 	
 	@Description(value="Questions JSON")
-	private Blob questionIds;
+	@Lob
+	private byte[] questionIds;
 	
 	@Description(value="Duration of Test")
 	private Integer duration;
@@ -45,7 +44,7 @@ public class Test extends AbstractEntity implements Serializable  {
 	private String basePriceTest;
 	
 	@Description(value="status of Test")
-	private Integer status;
+	private String status;
 	
 	@Description(value="Percentage of Negative marks")
 	private Integer percentNegative;
@@ -63,8 +62,8 @@ public class Test extends AbstractEntity implements Serializable  {
 	public Test() {
 	}
 	
-	public Test(String qCount,Blob questionIds,Integer duration,String createdBy,Timestamp lastAccessts,
-			String diificultyLevel,String testName,String testDesc,String basePriceTest,Integer status,
+	public Test(Integer qCount,byte[] questionIds,Integer duration,String createdBy,Timestamp lastAccessts,
+			String diificultyLevel,String testName,String testDesc,String basePriceTest,String status,
 			Integer percentNegative,Integer totalMarks,TestProduct testProduct,String category){
 		this.qCount = qCount;
 		this.questionIds = questionIds;
@@ -87,20 +86,12 @@ public class Test extends AbstractEntity implements Serializable  {
 		return ReflectionToStringBuilder.toString(this);
 	}
 	
-	public String getqCount() {
+	public Integer getqCount() {
 		return qCount;
 	}
 
-	public void setqCount(String qCount) {
+	public void setqCount(Integer qCount) {
 		this.qCount = qCount;
-	}
-
-	public Blob getQuestionIds() {
-		return questionIds;
-	}
-
-	public void setQuestionIds(Blob questionIds) {
-		this.questionIds = questionIds;
 	}
 
 	public Integer getDuration() {
@@ -159,11 +150,11 @@ public class Test extends AbstractEntity implements Serializable  {
 		this.basePriceTest = basePriceTest;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -215,5 +206,19 @@ public class Test extends AbstractEntity implements Serializable  {
 	 */
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	/**
+	 * @return the questionIds
+	 */
+	public byte[] getQuestionIds() {
+		return questionIds;
+	}
+
+	/**
+	 * @param questionIds the questionIds to set
+	 */
+	public void setQuestionIds(byte[] questionIds) {
+		this.questionIds = questionIds;
 	}
 }

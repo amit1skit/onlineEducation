@@ -12,5 +12,7 @@ import com.in.power.education.model.Test;
 public interface TestRepo extends CrudRepository<Test, Long>{
 
 	List<Test> findByTestName(@Param("testName") String testName);
+	
+	List<Test> findByCategory(@Param("category") String category);
 			
 }

@@ -1,8 +1,6 @@
 package com.in.power.education.worker;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
