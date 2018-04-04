@@ -14,5 +14,8 @@ public interface TestRepo extends CrudRepository<Test, Long>{
 	List<Test> findByTestName(@Param("testName") String testName);
 	
 	List<Test> findByCategory(@Param("category") String category);
-			
+	
+	List<Test> findByTestNameAndCategory(@Param("testName") String testName,@Param("category") String category);
+	
+	List<Test> findByStatus(@Param("status") String status);	
 }
