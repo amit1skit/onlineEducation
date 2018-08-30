@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.in.power.education.model.UserInfo;
@@ -21,13 +22,13 @@ public class LoginWorker {
 	@Autowired
 	UserInfoRepo userInfoRepo;
 	
+	
 	public SignInInfo getSignInInfo(String request){
 		SignInInfo info = null;
 		JSONObject requestObject = null;
 		try{
 			requestObject = new JSONObject(request);
 			UserLogin userlogin = userLoginRepo.findByuserID(requestObject.getString("userID"));
-			System.out.println("ssd"+userlogin.getPassword());
 			if(userlogin.getPassword().equals(requestObject.getString("password"))){
 				UserInfo userInfo = userInfoRepo.findByuserID(userlogin.getUserID());
 				info =  new SignInInfo(userlogin,userInfo);

@@ -1,6 +1,9 @@
 package com.in.power.education.worker;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.in.power.education.model.Question;
 import com.in.power.education.model.Test;
@@ -60,6 +64,7 @@ public class PowerWorker implements Constants{
 				responseObj = setResponse(responseObj,"success", "Saved Data", test.getAutoID(),questionIdsJSON.length());
 			} else if (testList.size() == 1) {
 				Test test = testList.get(0);
+				System.out.println("Hii");
 				if(testList.get(0).getQuestionIds()==null){
 					test.setQuestionIds(questionIdsJSON.toString().getBytes(StandardCharsets.UTF_8));
 					testRepo.save(test);
@@ -194,9 +199,24 @@ public class PowerWorker implements Constants{
 		}
 		return responseObj;
 	}
-	public JSONObject uploadImage(JSONObject request) {
-		JSONObject responseObj =  new JSONObject();
-		System.out.println("File Path "+filePath);
+	public JSONObject uploadImage(MultipartFile file) {
+		JSONObject responseObj = new JSONObject();
+		System.out.println("In Image Upload section ");
+		try {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get(filePath + file.getOriginalFilename());
+			Files.write(path, bytes);
+			System.out.println("Written in file...");
+			responseObj.put("status","Success");
+		} catch (Exception e) {
+			try {
+				responseObj.put("status","Failed");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 		return responseObj;
 	}
 	

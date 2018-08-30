@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.in.power.education.model.responseModel.SignInInfo;
 import com.in.power.education.worker.LoginWorker;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
 
 @RestController
 @RequestMapping("/secure/logon")

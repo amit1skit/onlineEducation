@@ -101,18 +101,7 @@ public class PowerController {
 	
 	@RequestMapping(value = "uploadImage" , method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<?> uploadImage( @RequestPart("ad") String adString, @RequestPart("file") MultipartFile file) throws IOException{
-		System.out.println("In the FIle Upload 2");
-		JSONObject responseObj = new JSONObject();
-		powerWorker.uploadImage(responseObj);
-		byte[] bytes = file.getBytes();
-		Path path = Paths.get("E://Workspace//" + file.getOriginalFilename());
-		Files.write(path, bytes);
-		try {
-			responseObj.put("status","Success");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JSONObject responseObj = powerWorker.uploadImage(file);
 		return  ResponseEntity.ok(responseObj.toString());
 	}
 }
