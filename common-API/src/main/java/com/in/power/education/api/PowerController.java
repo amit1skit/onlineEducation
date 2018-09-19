@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.in.power.education.model.UserInfo;
 import com.in.power.education.worker.PowerWorker;
 
 @RestController
@@ -103,5 +104,19 @@ public class PowerController {
 	public @ResponseBody ResponseEntity<?> uploadImage( @RequestPart("ad") String adString, @RequestPart("file") MultipartFile file) throws IOException{
 		JSONObject responseObj = powerWorker.uploadImage(file);
 		return  ResponseEntity.ok(responseObj.toString());
+	}
+	
+	@RequestMapping(value = "searchUser" , method = RequestMethod.POST)
+	public ResponseEntity<?> searchUser(@RequestBody String request){
+		UserInfo responseObj = null;
+		try {
+			responseObj = powerWorker.searchUser(request);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		if(responseObj!=null)
+			return	ResponseEntity.ok(responseObj.toString());
+		else
+			return	ResponseEntity.ok(null);
 	}
 }

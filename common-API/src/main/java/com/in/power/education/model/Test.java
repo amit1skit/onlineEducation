@@ -55,6 +55,9 @@ public class Test extends AbstractEntity implements Serializable  {
 	@Description(value="Category is similar to Tag that we can have.")
 	private String category;
 	
+	@Description(value="Type will have Quiz 0 and Test 1")
+	private Integer type;
+		
 	@ManyToOne(cascade = CascadeType.ALL)
 	@Description(value="Mapping to Test Product")
 	private TestProduct testProduct;
@@ -64,7 +67,7 @@ public class Test extends AbstractEntity implements Serializable  {
 	
 	public Test(Integer qCount,byte[] questionIds,Integer duration,String createdBy,Timestamp lastAccessts,
 			String diificultyLevel,String testName,String testDesc,String basePriceTest,String status,
-			Integer percentNegative,Integer totalMarks,TestProduct testProduct,String category){
+			Integer percentNegative,Integer totalMarks,TestProduct testProduct,String category,Integer type){
 		this.qCount = qCount;
 		this.questionIds = questionIds;
 		this.duration = duration;
@@ -79,6 +82,7 @@ public class Test extends AbstractEntity implements Serializable  {
 		this.totalMarks = totalMarks;
 		this.testProduct = testProduct;
 		this.category = category;
+		this.type = type;
 	}
 
 	@Override
@@ -220,5 +224,19 @@ public class Test extends AbstractEntity implements Serializable  {
 	 */
 	public void setQuestionIds(byte[] questionIds) {
 		this.questionIds = questionIds;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public Integer getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(Integer type) {
+		this.type = type;
 	}
 }

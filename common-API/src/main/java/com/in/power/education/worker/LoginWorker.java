@@ -32,8 +32,10 @@ public class LoginWorker {
 			if(userlogin.getPassword().equals(requestObject.getString("password"))){
 				UserInfo userInfo = userInfoRepo.findByuserID(userlogin.getUserID());
 				info =  new SignInInfo(userlogin,userInfo);
+					
 				System.out.println("Passed Login Information");
-				
+				userlogin.setNoOfAttempt(0);
+				userLoginRepo.save(userlogin);
 			}else{
 				System.out.println("Failed Login Information");
 				if(null == userlogin.getNoOfAttempt())
@@ -60,7 +62,7 @@ public class LoginWorker {
 			userlogin = userLoginRepo.save(userlogin);
 			
 			UserInfo userInfo = new UserInfo(userlogin, "", requestObject.getString("firstName"), requestObject.getString("lastName"),
-					null, null, null, requestObject.getString("email"), null, null, null, null, null,userlogin.getUserID());
+					null, null, null, requestObject.getString("email"), null, null, null, null, null,userlogin.getUserID(),"I",0);
 			
 			userInfoRepo.save(userInfo);
 			info = new SignInInfo(userlogin,userInfo);

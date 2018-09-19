@@ -19,6 +19,14 @@ public class UserLogin extends AbstractEntity implements Serializable {
 	@OneToOne(mappedBy="userLogin", cascade=CascadeType.ALL, orphanRemoval = true)
 	private UserInfo userInfo; 
 	
+	@Description("User Report mapping")
+	@OneToOne(mappedBy="userReport", cascade=CascadeType.ALL, orphanRemoval = true)
+	private UserReport userReport;
+	
+	@Description("User Subscription mapping")
+	@OneToOne(mappedBy="userSubscription", cascade=CascadeType.ALL, orphanRemoval = true)
+	private UserSubscription userSubscription;
+	
 	@Description(value = "User ID")
 	private String userID;
 	

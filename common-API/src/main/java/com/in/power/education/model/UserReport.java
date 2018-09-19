@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.data.rest.core.annotation.Description;
 
 @Entity
-public class Subscription extends AbstractEntity implements Serializable  {
+public class UserReport extends AbstractEntity implements Serializable  {
 
-//	1. courseID
-//	2. UserID
-//	3. endDate
-//	4. starrtDate
-
-
+	@OneToOne(cascade = CascadeType.ALL)
+	@Description(value="User Login information")
+	private UserLogin userLogin;  
+	
 	@Description(value="Start Date of Subscription")
 	private Timestamp startDt;
 	
@@ -25,10 +25,11 @@ public class Subscription extends AbstractEntity implements Serializable  {
 	private Timestamp endDt;
 	
 	
-	public Subscription() {
+	public UserReport() {
 	}
 	
-	public Subscription(Timestamp startDt,Timestamp endDt){
+	public UserReport(UserLogin userLogin,Timestamp startDt,Timestamp endDt){
+		this.userLogin = userLogin;
 		this.startDt = startDt;
 		this.endDt = endDt;
 	}
@@ -47,5 +48,19 @@ public class Subscription extends AbstractEntity implements Serializable  {
 
 	public void setEndDt(Timestamp endDt) {
 		this.endDt = endDt;
+	}
+
+	/**
+	 * @return the userLogin
+	 */
+	public UserLogin getUserLogin() {
+		return userLogin;
+	}
+
+	/**
+	 * @param userLogin the userLogin to set
+	 */
+	public void setUserLogin(UserLogin userLogin) {
+		this.userLogin = userLogin;
 	}
 }

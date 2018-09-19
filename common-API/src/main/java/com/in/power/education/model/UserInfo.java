@@ -2,11 +2,9 @@ package com.in.power.education.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -56,6 +54,12 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 	@Description(value="Address Country")
 	private String country;
 	
+	@Description(value="Zip Code")
+	private Integer zip;
+	
+	@Description(value="Status of User")
+	private String status;
+	
 	@Description(value="UserID")
 	private String userID;
 	
@@ -63,7 +67,7 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 	
 	public UserInfo(UserLogin userLogin, String role,String fName,String lName,
 			Date dob,String gender,String CellNo,String mailID,String addressLine1,
-			String addressLine2,String city,String state,String country, String userID){
+			String addressLine2,String city,String state,String country, String userID,String status,Integer zip){
 		this.userLogin = userLogin;
 		this.role = role;
 		this.fName = fName;
@@ -78,6 +82,8 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 		this.state = state;
 		this.country = country;
 		this.userID = userID;
+		this.status = status;
+		this.zip = zip;
 	}
 
 	@Override
@@ -196,4 +202,33 @@ public class UserInfo  extends AbstractEntity implements Serializable {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the zip
+	 */
+	public Integer getZip() {
+		return zip;
+	}
+
+	/**
+	 * @param zip the zip to set
+	 */
+	public void setZip(Integer zip) {
+		this.zip = zip;
+	}
+	
 }

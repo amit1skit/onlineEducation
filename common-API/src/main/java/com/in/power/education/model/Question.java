@@ -3,15 +3,12 @@ package com.in.power.education.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import org.springframework.data.rest.core.annotation.Description;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.Column;
-import javax.persistence.Lob;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
+import org.springframework.data.rest.core.annotation.Description;
 
 @Entity
 public class Question extends AbstractEntity implements Serializable  {

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.in.power.education.model.Question;
 import com.in.power.education.model.Test;
+import com.in.power.education.model.UserInfo;
 import com.in.power.education.repo.QuestionRepo;
 import com.in.power.education.repo.TestRepo;
 import com.in.power.education.repo.UserInfoRepo;
@@ -239,6 +240,11 @@ public class PowerWorker implements Constants{
 		}
 		
 		return response;
+	}
+	
+	public UserInfo searchUser(String user){
+//		userInfoRepo.findByfName(fName)
+		return null;
 	}
 
 }
