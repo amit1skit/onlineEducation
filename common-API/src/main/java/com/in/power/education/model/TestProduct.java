@@ -51,7 +51,8 @@ public class TestProduct extends AbstractEntity implements Serializable{
 
 	public TestProduct(){}
 	
-	public TestProduct(String pNm, String pDesc, String pMode,String pTag,Date startDate,Date endDate,Integer validity,Integer pType) {
+	public TestProduct(String pNm, String pDesc, String pMode,String pTag,Date startDate,Date endDate,
+			Integer validity,Integer pType,Double basePrice) {
 		super();
 		this.pNm = pNm;
 		this.pDesc = pDesc;
@@ -61,6 +62,7 @@ public class TestProduct extends AbstractEntity implements Serializable{
 		this.endDate = endDate;
 		this.validity = validity;
 		this.pType = pType;
+		this.basePrice = basePrice;
 	}
 
 	/**
@@ -187,5 +189,19 @@ public class TestProduct extends AbstractEntity implements Serializable{
 	 */
 	public void setTest(Set<Test> test) {
 		this.test = test;
+	}
+
+	/**
+	 * @return the basePrice
+	 */
+	public Double getBasePrice() {
+		return basePrice;
+	}
+
+	/**
+	 * @param basePrice the basePrice to set
+	 */
+	public void setBasePrice(Double basePrice) {
+		this.basePrice = basePrice;
 	}
 }
