@@ -27,11 +27,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	<modules>
 		<module>common-api</module>
 	</modules>
-	<distributionManagement>
+<distributionManagement>
     <snapshotRepository>
         <id>snapshots</id>
         <name>DESKTOP-DS8IVLL-snapshots</name>
-        <url>http://localhost:8081/artifactory/libs-snapshot-local</url>
+        <url>http://localhost:8081/artifactory/libs-snapshot</url>
     </snapshotRepository>
 </distributionManagement>
 </project>
